@@ -91,10 +91,23 @@ class HelloWorld {
 
                         }
                 }
+
+                public static int heightOfTree(Node root) {
+                        if (root == null) {
+                                return -1;
+                        }
+
+                        int leftHeight = heightOfTree(root.left);
+                        int rightHeight = heightOfTree(root.right);
+
+                        int maxHeight = 1 + Math.max(leftHeight, rightHeight);
+
+                        return maxHeight;
+                }
         }
 
         public static void main(String[] args) {
-                int nodes[] = { 8, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
+                int nodes[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
 
                 BinaryTree tree = new BinaryTree();
                 Node ans = tree.buildTree(nodes);
@@ -104,8 +117,10 @@ class HelloWorld {
                 System.out.println();
                 tree.postOrder(ans);
                 System.out.println();
-                ;
                 tree.levelOrder(ans);
+
+                int maxHeight = tree.heightOfTree(ans);
+                System.out.println(maxHeight);
 
                 // System.out.print(ans.data);
 
