@@ -104,6 +104,27 @@ class HelloWorld {
 
                         return maxHeight;
                 }
+
+                public static int noOfNodesInATree(Node root){
+                        if(root == null){
+                                return 0;
+                        }
+
+                        int leftCount = noOfNodesInATree(root.left);
+                        int rightCount = noOfNodesInATree(root.right);
+
+                        return leftCount + rightCount +1;
+                }
+
+                public static int sumOfNodes(Node root){
+                        if(root == null){
+                                return 0;
+                        }
+                        int leftSum = sumOfNodes(root.left);
+                        int rightSum = sumOfNodes(root.right);
+
+                        return rightSum + leftSum + root.data;
+                }
         }
 
         public static void main(String[] args) {
@@ -121,6 +142,11 @@ class HelloWorld {
 
                 int maxHeight = tree.heightOfTree(ans);
                 System.out.println(maxHeight);
+                int numberOfTotalNodesInATree = tree.noOfNodesInATree(ans);
+                System.out.println(numberOfTotalNodesInATree);
+
+                int totalSum = tree.sumOfNodes(ans);
+                System.out.println(totalSum);
 
                 // System.out.print(ans.data);
 
