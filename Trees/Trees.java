@@ -105,25 +105,57 @@ class HelloWorld {
                         return maxHeight;
                 }
 
-                public static int noOfNodesInATree(Node root){
-                        if(root == null){
+                public static int noOfNodesInATree(Node root) {
+                        if (root == null) {
                                 return 0;
                         }
 
                         int leftCount = noOfNodesInATree(root.left);
                         int rightCount = noOfNodesInATree(root.right);
 
-                        return leftCount + rightCount +1;
+                        return leftCount + rightCount + 1;
                 }
 
-                public static int sumOfNodes(Node root){
-                        if(root == null){
+                public static int sumOfNodes(Node root) {
+                        if (root == null) {
                                 return 0;
                         }
                         int leftSum = sumOfNodes(root.left);
                         int rightSum = sumOfNodes(root.right);
 
                         return rightSum + leftSum + root.data;
+                }
+
+                public static boolean isIdentical(Node node, Node subRoot) {
+                        if (node == null && subRoot == null) {
+                                return true;
+                        } else if (node == null || subRoot == null || node.data != subRoot.data) {
+                                return false;
+                        }
+
+                        if (!isIdentical(node.left, subRoot.left)) {
+                                return false;
+                        }
+
+                        if (!isIdentical(node.right, subRoot.right)) {
+                                return false;
+                        }
+
+                        return true;
+
+                }
+
+                public static boolean isSubTree(Node root, Node subRoot) {
+                        if (root == null) {
+                                return false;
+                        }
+                        if (root.data == subRoot.data) {
+                                if (isIdentical(root, subRoot)) {
+                                        return true;
+                                }
+                        }
+
+                        return isSubTree(root.left, subRoot) || isSubTree(root.right, subRoot);
                 }
         }
 
@@ -148,7 +180,18 @@ class HelloWorld {
                 int totalSum = tree.sumOfNodes(ans);
                 System.out.println(totalSum);
 
+                Node root = new Node(1);
+                root.left = new Node(2);
+                root.right = new Node(3);
+                root.left.left = new Node(4);
+                root.left.right = new Node(5);
+                root.right.right = new Node(6);
                 // System.out.print(ans.data);
 
+                Node subroot = new Node(2);
+                subroot.left = new Node(4);
+                subroot.right = new Node(5);
+
+                System.out.println(tree.isSubTree(root, subroot));
         }
 }
