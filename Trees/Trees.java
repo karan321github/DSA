@@ -200,35 +200,34 @@ class HelloWorld {
                                         }
                                 }
 
-                                for (int i = min; i <= max; i++) {
-                                        System.out.print(map.get(i).data + " ");
-                                }
-                                System.out.println();
-
                         }
+                        for (int i = min; i <= max; i++) {
+                                System.out.print(map.get(i).data + " ");
+                        }
+                        System.out.println();
                 }
         }
 
         public static void main(String[] args) {
-                int nodes[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
+                // int nodes[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
 
                 BinaryTree tree = new BinaryTree();
-                Node ans = tree.buildTree(nodes);
-                tree.preorder(ans);
-                System.out.println();
-                tree.inorder(ans);
-                System.out.println();
-                tree.postOrder(ans);
-                System.out.println();
-                tree.levelOrder(ans);
+                // Node ans = tree.buildTree(nodes);
+                // tree.preorder(ans);
+                // System.out.println();
+                // tree.inorder(ans);
+                // System.out.println();
+                // tree.postOrder(ans);
+                // System.out.println();
+                // tree.levelOrder(ans);
 
-                int maxHeight = tree.heightOfTree(ans);
-                System.out.println(maxHeight);
-                int numberOfTotalNodesInATree = tree.noOfNodesInATree(ans);
-                System.out.println(numberOfTotalNodesInATree);
+                // int maxHeight = tree.heightOfTree(ans);
+                // System.out.println(maxHeight);
+                // int numberOfTotalNodesInATree = tree.noOfNodesInATree(ans);
+                // System.out.println(numberOfTotalNodesInATree);
 
-                int totalSum = tree.sumOfNodes(ans);
-                System.out.println(totalSum);
+                // int totalSum = tree.sumOfNodes(ans);
+                // System.out.println(totalSum);
 
                 // Node root = new Node(1);
                 // root.left = new Node(2);
