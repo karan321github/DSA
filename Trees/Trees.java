@@ -157,6 +157,56 @@ class HelloWorld {
 
                         return isSubTree(root.left, subRoot) || isSubTree(root.right, subRoot);
                 }
+
+                static class Info {
+                        Node node;
+                        int hd;
+
+                        public Info(Node node, int hd) {
+                                this.node = node;
+                                this.hd = hd;
+                        }
+                }
+
+                public static void topView(Node root) {
+                        Queue<Info> q = new LinkedList<>();
+                        HashMap<Integer, Node> map = new HashMap<>();
+                        int min = 0;
+                        int max = 0;
+                        q.add(new Info(root, 0));
+                        q.add(null);
+                        while (!q.isEmpty()) {
+                                Info currInfo = q.remove();
+                                if (currInfo == null) {
+                                        if (q.isEmpty()) {
+
+                                                break;
+                                        } else {
+
+                                                q.add(null);
+                                        }
+                                } else {
+                                        if (!map.containsKey(currInfo.hd)) {
+                                                map.put(currInfo.hd, currInfo.node);
+                                        }
+                                        if (currInfo.node.left != null) {
+                                                q.add(new Info(currInfo.node.left, currInfo.hd - 1));
+                                                min = Math.min(min, currInfo.hd - 1);
+                                        }
+
+                                        if (currInfo.node.right != null) {
+                                                q.add(new Info(currInfo.node.right, currInfo.hd + 1));
+                                                max = Math.max(max, currInfo.hd + 1);
+                                        }
+                                }
+
+                                for (int i = min; i <= max; i++) {
+                                        System.out.print(map.get(i).data + " ");
+                                }
+                                System.out.println();
+
+                        }
+                }
         }
 
         public static void main(String[] args) {
@@ -180,18 +230,27 @@ class HelloWorld {
                 int totalSum = tree.sumOfNodes(ans);
                 System.out.println(totalSum);
 
+                // Node root = new Node(1);
+                // root.left = new Node(2);
+                // root.right = new Node(3);
+                // root.left.left = new Node(4);
+                // root.left.right = new Node(5);
+                // root.right.right = new Node(6);
+                // // System.out.print(ans.data);
+
+                // Node subroot = new Node(2);
+                // subroot.left = new Node(4);
+                // subroot.right = new Node(5);
+
                 Node root = new Node(1);
                 root.left = new Node(2);
                 root.right = new Node(3);
                 root.left.left = new Node(4);
                 root.left.right = new Node(5);
-                root.right.right = new Node(6);
-                // System.out.print(ans.data);
+                root.right.left = new Node(6);
+                root.right.right = new Node(7);
 
-                Node subroot = new Node(2);
-                subroot.left = new Node(4);
-                subroot.right = new Node(5);
-
-                System.out.println(tree.isSubTree(root, subroot));
+                // System.out.println(tree.isSubTree(root, subroot));
+                tree.topView(root);
         }
 }
