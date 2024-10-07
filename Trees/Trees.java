@@ -206,6 +206,85 @@ class HelloWorld {
                         }
                         System.out.println();
                 }
+
+                public static void kthLevel(Node root, int level, int k) {
+                        if (root == null) {
+                                return;
+                        }
+                        if (level == k) {
+                                System.out.print(root.data + " ");
+                                return;
+                        }
+
+                        kthLevel(root.left, level + 1, k);
+                        kthLevel(root.right, level + 1, k);
+                }
+
+                public static void KthLevelIterative(Node root, int k) {
+                        int level = 1;
+                        Queue<Node> q = new LinkedList<>();
+                        q.add(root);
+                        q.add(null);
+
+                        while (!q.isEmpty()) {
+                                Node currNode = q.remove();
+                                if (currNode == null) {
+                                        System.out.println();
+                                        level++;
+                                        if (q.isEmpty()) {
+                                                break;
+                                        } else {
+                                                q.add(null);
+                                        }
+                                } else {
+                                        if (level == k)
+                                                System.out.print(currNode.data + " ");
+                                        if (currNode.left != null) {
+                                                q.add(currNode.left);
+                                        }
+                                        if (currNode.right != null) {
+                                                q.add(currNode.right);
+                                        }
+                                }
+                        }
+                }
+
+                public static boolean getPath(Node root, int n, ArrayList<Node> path) {
+                        if (root == null) {
+                                return false;
+                        }
+                        path.add(root);
+                        if (root.data == n) {
+                                return true;
+                        }
+
+                        boolean leftFound = getPath(root.left, n, path);
+                        boolean rightFound = getPath(root.right, n, path);
+
+                        if (leftFound || rightFound) {
+                                return true;
+                        }
+
+                        path.remove(path.size() - 1);
+                        return false;
+                }
+
+                public static Node lca(Node root, int n1, int n2) {
+                        ArrayList<Node> path1 = new ArrayList<>();
+                        ArrayList<Node> path2 = new ArrayList<>();
+
+                        getPath(root, n1, path1);
+                        getPath(root, n2, path2);
+                        int i = 0;
+                        for (; i < path1.size() && i < path2.size(); i++) {
+                                if (path1.get(i) != path2.get(i)) {
+                                        break;
+                                }
+                        }
+
+                        Node lca = path1.get(i - 1);
+                        return lca;
+                }
         }
 
         public static void main(String[] args) {
@@ -251,5 +330,10 @@ class HelloWorld {
 
                 // System.out.println(tree.isSubTree(root, subroot));
                 tree.topView(root);
+                System.out.println();
+                tree.kthLevel(root, 1, 3);
+                System.out.println();
+                tree.KthLevelIterative(root, 3);
+                System.out.println(tree.lca(root, 4, 5).data);
         }
 }
