@@ -285,6 +285,36 @@ class HelloWorld {
                         Node lca = path1.get(i - 1);
                         return lca;
                 }
+
+                public static int lcaDist(Node root, int n) {
+                        if (root == null) {
+                                return -1;
+                        }
+
+                        if (root.data == n) {
+                                return 0;
+                        }
+
+                        int leftDistance = lcaDist(root.left, n);
+                        int rightDistance = lcaDist(root.right, n);
+
+                        if (leftDistance == -1 && rightDistance == -1) {
+                                return -1;
+                        } else if (leftDistance == -1) {
+                                return rightDistance + 1;
+                        } else {
+                                return leftDistance + 1;
+                        }
+                }
+
+                public static int minDistanceBetweenTwoNodes(Node root, int n1, int n2) {
+                        Node lca = lca(root, n1, n2);
+
+                        int dist1 = lcaDist(lca, n1);
+                        int dist2 = lcaDist(lca, n2);
+
+                        return dist1 + dist2;
+                }
         }
 
         public static void main(String[] args) {
@@ -335,5 +365,6 @@ class HelloWorld {
                 System.out.println();
                 tree.KthLevelIterative(root, 3);
                 System.out.println(tree.lca(root, 4, 5).data);
+                System.out.println(tree.minDistanceBetweenTwoNodes(root, 4, 5));
         }
 }
