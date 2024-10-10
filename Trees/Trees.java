@@ -315,6 +315,31 @@ class HelloWorld {
 
                         return dist1 + dist2;
                 }
+
+                public static int KthAnccestor(Node root, int n, int k) {
+                        if (root == null) {
+                                return -1;
+                        }
+                        if (root.data == n) {
+                                return 0;
+                        }
+
+                        int leftDist = KthAnccestor(root.left, n, k);
+                        int rightist = KthAnccestor(root.right, n, k);
+
+                        if (leftDist == -1 && rightist == -1) {
+                                return -1;
+                        }
+
+                        int max = Math.max(leftDist, rightist);
+
+                        if (max + 1 == k) {
+                                System.out.println(root.data);
+                        }
+
+                        return max + 1;
+
+                }
         }
 
         public static void main(String[] args) {
@@ -366,5 +391,6 @@ class HelloWorld {
                 tree.KthLevelIterative(root, 3);
                 System.out.println(tree.lca(root, 4, 5).data);
                 System.out.println(tree.minDistanceBetweenTwoNodes(root, 4, 5));
+                System.out.println(tree.KthAnccestor(root , 5 , 2));
         }
 }
