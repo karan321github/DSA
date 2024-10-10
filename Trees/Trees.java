@@ -365,6 +365,6 @@ class HelloWorld {
                 System.out.println();
                 tree.KthLevelIterative(root, 3);
                 System.out.println(tree.lca(root, 4, 5).data);
-                System.out.println(tree.minDistanceBetweenTwoNodes(root, 4, 5));
+                System.out.println(tree.minDistanceBetweenTwoNodes(root, 4, 2));
         }
 }
