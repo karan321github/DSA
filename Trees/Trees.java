@@ -340,6 +340,7 @@ class HelloWorld {
                         return max + 1;
 
                 }
+                
         }
 
         public static void main(String[] args) {
@@ -390,11 +391,11 @@ class HelloWorld {
                 System.out.println();
                 tree.KthLevelIterative(root, 3);
                 System.out.println(tree.lca(root, 4, 5).data);
-<<<<<<< HEAD
+
                 System.out.println(tree.minDistanceBetweenTwoNodes(root, 4, 5));
                 System.out.println(tree.KthAnccestor(root , 5 , 2));
-=======
+
                 System.out.println(tree.minDistanceBetweenTwoNodes(root, 4, 2));
->>>>>>> 6389785a39313a4f7574219c2d393448b4d2f5eb
+
         }
 }
