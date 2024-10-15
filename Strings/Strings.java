@@ -64,6 +64,19 @@ public class Strings {
     return ans.toString();
   }
 
+  public static String removeDuplicate1(String str) {
+    StringBuilder ans = new StringBuilder();
+    Map<Character, Integer> map = new LinkedHashMap<>();
+    for (char c : str.toCharArray()) {
+      map.put(c, map.getOrDefault(c, 0) + 1);
+    }
+
+    for (char c : map.keySet()) {
+      ans.append(c);
+    }
+    return ans.toString();
+  }
+
   public static void main(String[] args) {
     String str = "helloworld";
 
@@ -74,5 +87,6 @@ public class Strings {
     System.out.println();
     countOccurrences(str);
     System.out.println(removeDuplicate(str));
+    System.out.println(removeDuplicate1(str));
   }
 }
