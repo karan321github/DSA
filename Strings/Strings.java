@@ -77,9 +77,22 @@ public class Strings {
     return ans.toString();
   }
 
+  public static String longestCommonPrefix(String[] strs) {
+    String prefix = strs[0];
+    for (int i = 1; i < strs.length; i++) {
+      while (strs[i].indexOf(prefix) != 0) {
+        prefix = prefix.substring(0, prefix.length() - 1);
+      }
+      if (prefix.length() == 0) {
+        return "";
+      }
+    }
+    return prefix;
+  }
+
   public static void main(String[] args) {
     String str = "helloworld";
-
+    String strs[] = {"flower","flow","flight"};
     System.out.println(reverseString(str));
     System.out.println(isPalindrome(str));
     System.out.println(reverseWords(str));
@@ -88,5 +101,6 @@ public class Strings {
     countOccurrences(str);
     System.out.println(removeDuplicate(str));
     System.out.println(removeDuplicate1(str));
+    System.out.println(longestCommonPrefix(strs));
   }
 }
