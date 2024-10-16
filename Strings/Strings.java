@@ -90,9 +90,24 @@ public class Strings {
     return prefix;
   }
 
+  public static void print2DArray(int[][] arr) {
+    int row = arr.length;
+    int col = arr[0].length;
+
+    for (int i = 0; i < row; i++) {
+      for (int j = 0; j < col; j++) {
+        System.out.print(arr[i][j]+" ");
+       
+      }
+      System.out.println();
+    }
+  }
+
   public static void main(String[] args) {
+    int arr[][] = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+    print2DArray(arr);
     String str = "helloworld";
-    String strs[] = {"flower","flow","flight"};
+    String strs[] = { "flower", "flow", "flight" };
     System.out.println(reverseString(str));
     System.out.println(isPalindrome(str));
     System.out.println(reverseWords(str));
