@@ -130,6 +130,38 @@ public class Strings {
     }
   }
 
+  public static String reverseWordInAString(String s) {
+    StringBuilder ans = new StringBuilder();
+    String strArr[] = s.split(" ");
+    for (int i = strArr.length - 1; i >= 0; i--) {
+      ans.append(strArr[i] + " ");
+    }
+    return ans.toString().trim();
+  }
+
+  public static int LengthOfTheLastWord(String s) {
+    String arr[] = s.trim().split("\\s+");
+    int n = arr.length;
+    String ans = arr[n - 1].trim();
+    return ans.length();
+
+  }
+
+  public static int LengthOfTheLastWord2(String s) {
+    int count = 0;
+    String str = s.trim();
+    for (int i = str.length() - 1; i >= 0; i--) {
+      if (str.charAt(i) != ' ') {
+        count++;
+      } else {
+        break;
+      }
+    }
+
+    return count;
+
+  }
+
   public static void main(String[] args) {
     int arr[][] = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
     print2DArray(arr);
@@ -147,5 +179,9 @@ public class Strings {
     int num1[] = { 1, 2, 3, 0, 0, 0 };
     int num2[] = { 2, 5, 6 };
     merge(num1, num2, 3, 3);
+    System.out.println();
+    String s = "the sky is blue    ";
+    System.out.println(LengthOfTheLastWord(s));
+    System.out.println(reverseWordInAString(s));
   }
 }
