@@ -180,7 +180,7 @@ public class Strings {
     int num2[] = { 2, 5, 6 };
     merge(num1, num2, 3, 3);
     System.out.println();
-    String s = "the sky is blue    ";
+    String s = "The lazy dog jumps over the fox";
     System.out.println(LengthOfTheLastWord(s));
     System.out.println(reverseWordInAString(s));
   }
