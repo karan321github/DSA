@@ -243,7 +243,7 @@ public class Strings {
     if (arr[si] <= arr[mid]) {
       // case a
       if (arr[si] <= target && target <= arr[mid]) {
-        return searchInRotatedArray(arr, target, 0, mid-1);
+        return searchInRotatedArray(arr, target, 0, mid - 1);
       } else {
         return searchInRotatedArray(arr, target, mid + 1, ei);
       }
@@ -257,12 +257,61 @@ public class Strings {
 
   }
 
+  // s = "A man, a plan, a canal: Panama"
+  public static boolean validPalindrome(String str) {
+    String s = str.trim().toLowerCase();
+    int i = 0, j = s.length() - 1;
+    while (i <= j) {
+      if (!Character.isLetterOrDigit(s.charAt(i))) {
+        i++;
+      } else if (!Character.isLetterOrDigit(s.charAt(j))) {
+        j--;
+      } else {
+
+        if (s.charAt(i) != s.charAt(j)) {
+          return false;
+        }
+        i++;
+        j--;
+      }
+    }
+    return true;
+  }
+
+  public static boolean validAnagram(String s, String t) {
+    HashMap<Character, Integer> map = new HashMap<>();
+
+    for (char c : s.toCharArray()) {
+      map.put(c, map.getOrDefault(c, 0) + 1);
+    }
+
+    for (char c : t.toCharArray()) {
+      if (map.get(c) != null) {
+        if (map.get(c) == 1) {
+          map.remove(c);
+        } else {
+
+          map.put(c, map.getOrDefault(c, 0) - 1);
+        }
+      } else {
+        return false;
+      }
+
+    }
+
+    return map.isEmpty();
+
+  }
+
   public static void main(String[] args) {
-    String str = "My name is khan";
+    String s = "anagram", t = "nagaram";
+    System.out.println(validAnagram(s, t));
+    String str = "Naman";
+    System.out.println(validPalindrome(str));
     System.out.println(reverseWordsWithoutVowels(str));
     System.out.println(withoutVowels(str));
-    int arr[] = { 4,5,6,7,0,1,2 };
-    System.out.println(searchInRotatedArray(arr, 4, 0, arr.length-1));
+    int arr[] = { 4, 5, 6, 7, 0, 1, 2 };
+    System.out.println(searchInRotatedArray(arr, 4, 0, arr.length - 1));
     System.out.println(maxSubArraySum(arr));
     System.out.println(isDuplicate(arr));
     zerosInEnd(arr);
