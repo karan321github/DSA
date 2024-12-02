@@ -162,26 +162,129 @@ public class Strings {
 
   }
 
+  public static boolean isVowel(char c) {
+    c = Character.toLowerCase(c);
+    return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+  }
+
+  public static String withoutVowels(String str) {
+    StringBuilder ans = new StringBuilder();
+    for (int i = 0; i < str.length(); i++) {
+      char ch = str.charAt(i);
+      if (!isVowel(ch)) {
+        ans.append(ch);
+      }
+    }
+    return ans.toString();
+  }
+
+  public static String reverseWordsWithoutVowels(String str) {
+    StringBuilder ans = new StringBuilder();
+    String[] s = str.split(" ");
+    for (int i = 0; i < s.length; i++) {
+      String reversedString = reverseString(s[i]);
+      String removeVowels = withoutVowels(reversedString);
+      ans.append(removeVowels).append(" ");
+
+    }
+    return ans.toString();
+
+  }
+
+  // [1,0,2,0,3,0,4,0,5,0]; ["" , "" , "" ,"" , "" , "" , "" , "" , "" , ""]
+  public static void zerosInEnd(int[] arr) {
+    int j = 0, k = arr.length - 1;
+    int newArr[] = new int[arr.length];
+    for (int i = 0; i < arr.length - 1; i++) {
+      if (arr[i] != 0) {
+        newArr[j] = arr[i];
+        j++;
+      } else {
+
+        newArr[k] = arr[i];
+        k--;
+      }
+
+    }
+    for (int i = 0; i < newArr.length; i++) {
+      System.out.print(newArr[i] + " ");
+    }
+    System.out.println();
+  }
+
+  // nums = [-2,1,-3,4,-1,2,1,-5,4]
+  public static int maxSubArraySum(int arr[]) {
+    int max = Integer.MIN_VALUE;
+    int currSum = 0;
+    for (int i = 0; i < arr.length; i++) {
+      currSum = Math.max(currSum += arr[i], arr[i]);
+      max = Math.max(max, currSum);
+    }
+    return max;
+  }
+
+  public static boolean isDuplicate(int arr[]) {
+    Set<Integer> set = new HashSet<>();
+    for (int i : arr) {
+      if (set.contains(i)) {
+        return true;
+      }
+      set.add(i);
+    }
+    return false;
+
+  }
+
+  public static int searchInRotatedArray(int arr[], int target, int si, int ei) {
+    int mid = (si + ei) / 2;
+    if (arr[mid] == target) {
+      return mid;
+    }
+    if (arr[si] <= arr[mid]) {
+      // case a
+      if (arr[si] <= target && target <= arr[mid]) {
+        return searchInRotatedArray(arr, target, 0, mid-1);
+      } else {
+        return searchInRotatedArray(arr, target, mid + 1, ei);
+      }
+    } else {
+      if (arr[mid] <= target && target <= arr[ei]) {
+        return searchInRotatedArray(arr, target, mid + 1, ei);
+      } else {
+        return searchInRotatedArray(arr, target, si, mid - 1);
+      }
+    }
+
+  }
+
   public static void main(String[] args) {
-    int arr[][] = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
-    print2DArray(arr);
-    String str = "helloworld";
-    String strs[] = { "flower", "flow", "flight" };
-    System.out.println(reverseString(str));
-    System.out.println(isPalindrome(str));
-    System.out.println(reverseWords(str));
-    System.out.println(rverseWordString(str));
-    System.out.println();
-    countOccurrences(str);
-    System.out.println(removeDuplicate(str));
-    System.out.println(removeDuplicate1(str));
-    System.out.println(longestCommonPrefix(strs));
-    int num1[] = { 1, 2, 3, 0, 0, 0 };
-    int num2[] = { 2, 5, 6 };
-    merge(num1, num2, 3, 3);
-    System.out.println();
-    String s = "The lazy dog jumps over the fox";
-    System.out.println(LengthOfTheLastWord(s));
-    System.out.println(reverseWordInAString(s));
+    String str = "My name is khan";
+    System.out.println(reverseWordsWithoutVowels(str));
+    System.out.println(withoutVowels(str));
+    int arr[] = { 4,5,6,7,0,1,2 };
+    System.out.println(searchInRotatedArray(arr, 4, 0, arr.length-1));
+    System.out.println(maxSubArraySum(arr));
+    System.out.println(isDuplicate(arr));
+    zerosInEnd(arr);
+    // int arr[][] = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+    // print2DArray(arr);
+    // // String str = "helloworld";
+    // String strs[] = { "flower", "flow", "flight" };
+    // System.out.println(reverseString(str));
+    // System.out.println(isPalindrome(str));
+    // System.out.println(reverseWords(str));
+    // System.out.println(rverseWordString(str));
+    // System.out.println();
+    // countOccurrences(str);
+    // System.out.println(removeDuplicate(str));
+    // System.out.println(removeDuplicate1(str));
+    // System.out.println(longestCommonPrefix(strs));
+    // int num1[] = { 1, 2, 3, 0, 0, 0 };
+    // int num2[] = { 2, 5, 6 };
+    // merge(num1, num2, 3, 3);
+    // System.out.println();
+    // String s = "The lazy dog jumps over the fox";
+    // System.out.println(LengthOfTheLastWord(s));
+    // System.out.println(reverseWordInAString(s));
   }
 }
