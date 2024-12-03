@@ -280,7 +280,6 @@ public class Strings {
 
   public static boolean validAnagram(String s, String t) {
     HashMap<Character, Integer> map = new HashMap<>();
-
     for (char c : s.toCharArray()) {
       map.put(c, map.getOrDefault(c, 0) + 1);
     }
@@ -290,7 +289,6 @@ public class Strings {
         if (map.get(c) == 1) {
           map.remove(c);
         } else {
-
           map.put(c, map.getOrDefault(c, 0) - 1);
         }
       } else {
@@ -303,10 +301,89 @@ public class Strings {
 
   }
 
+  public static boolean validAnagram2(String s, String t) {
+    if (s.length() != t.length()) {
+      return false;
+    }
+
+    int freq[] = new int[26];
+    for (int i = 0; i < s.length(); i++) {
+      freq[s.charAt(i) - 'a']++;
+      freq[t.charAt(i) - 'a']--;
+    }
+    for (int c : freq) {
+      if (c != 0) {
+        return false;
+      }
+    }
+    return true;
+
+  }
+
+  public static boolean isOpenBracket(char c) {
+    return c == '(' || c == '{' || c == '[';
+  }
+
+  public static boolean isMatching(char a, char b) {
+    return (a == '[' && b == ']') ||
+        (a == '{' && b == '}') ||
+        (a == '(' && b == ')');
+  }
+
+  public static boolean validParantheses(String str) {
+    Stack<Character> s = new Stack<>();
+
+    for (char c : str.toCharArray()) {
+      if (isOpenBracket(c)) {
+        s.push(c);
+      } else {
+        if (s.isEmpty()) {
+          return false;
+        } else {
+          if (!isMatching(s.peek(), c)) {
+            return false;
+          } else {
+            s.pop();
+          }
+
+        }
+
+      }
+    }
+
+    return s.isEmpty();
+
+  }
+
+  public static String removeConsecutiveCharacter(String S) {
+    StringBuilder ans = new StringBuilder();
+    ans.append(S.charAt(0));
+    for (int i = 1; i < S.length(); i++) {
+      if (S.charAt(i - 1) != S.charAt(i)) {
+        ans.append(S.charAt(i));
+      }
+    }
+    return ans.toString();
+  }
+
+  public static String longestCommonPrefix2(String[] strs) {
+    String ans = "";
+    ans += (strs[0]);
+    for (int i = 1; i < strs.length; i++) {
+      if (ans.contains(strs[i])) {
+        ans.substring(strs[i].length());
+      }
+    }
+    return ans;
+  }
+
   public static void main(String[] args) {
-    String s = "anagram", t = "nagaram";
-    System.out.println(validAnagram(s, t));
-    String str = "Naman";
+    // String s = "rat", t = "car";
+    // System.out.println(validAnagram2(s, t));
+    String str = "(){}[";
+    String[] strs = { "flower", "flow", "flight" };
+    System.out.println(longestCommonPrefix2(strs));
+    System.out.println(validParantheses(str));
     System.out.println(validPalindrome(str));
     System.out.println(reverseWordsWithoutVowels(str));
     System.out.println(withoutVowels(str));
