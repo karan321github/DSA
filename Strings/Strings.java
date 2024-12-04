@@ -1,5 +1,7 @@
 import java.util.*;
 
+import javax.xml.stream.events.Characters;
+
 public class Strings {
   public static String reverseString(String str) {
     String ans = "";
@@ -377,6 +379,32 @@ public class Strings {
     return ans;
   }
 
+  public static int characterReplacement(String s, int k) {
+    HashMap<Character, Integer> map = new HashMap<>();
+    int windowSize = 0;
+    int maxLength = 0;
+    int maxFreq = 0;
+    int left = 0;
+    for (int i = 0; i < s.length(); i++) {
+        windowSize++;
+        char currChar = s.charAt(i);
+        map.put(currChar, map.getOrDefault(currChar, 0) + 1);
+        maxFreq = Math.max(maxFreq, map.get(currChar));
+
+        int charNeededToChange = windowSize - maxFreq;
+        if (charNeededToChange > k) {
+            char leftChar = s.charAt(left);
+            map.put(leftChar, map.get(leftChar) - 1);
+            left++;
+            windowSize--;
+        }
+
+        maxLength = Math.max(maxLength, windowSize);
+    }
+
+    return maxLength;
+
+}
   public static void main(String[] args) {
     // String s = "rat", t = "car";
     // System.out.println(validAnagram2(s, t));
