@@ -386,27 +386,31 @@ public class Strings {
     int maxFreq = 0;
     int left = 0;
     for (int i = 0; i < s.length(); i++) {
-        windowSize++;
-        char currChar = s.charAt(i);
-        map.put(currChar, map.getOrDefault(currChar, 0) + 1);
-        maxFreq = Math.max(maxFreq, map.get(currChar));
+      windowSize++;
+      char currChar = s.charAt(i);
+      map.put(currChar, map.getOrDefault(currChar, 0) + 1);
+      maxFreq = Math.max(maxFreq, map.get(currChar));
 
-        int charNeededToChange = windowSize - maxFreq;
-        if (charNeededToChange > k) {
-            char leftChar = s.charAt(left);
-            map.put(leftChar, map.get(leftChar) - 1);
-            left++;
-            windowSize--;
-        }
+      int charNeededToChange = windowSize - maxFreq;
+      if (charNeededToChange > k) {
+        char leftChar = s.charAt(left);
+        map.put(leftChar, map.get(leftChar) - 1);
+        left++;
+        windowSize--;
+      }
 
-        maxLength = Math.max(maxLength, windowSize);
+      maxLength = Math.max(maxLength, windowSize);
     }
 
     return maxLength;
 
-}
+  }
+
   public static void main(String[] args) {
     // String s = "rat", t = "car";
+    String s = "ABAB";
+    int k = 2;
+    System.out.println(characterReplacement(s, k));
     // System.out.println(validAnagram2(s, t));
     String str = "(){}[";
     String[] strs = { "flower", "flow", "flight" };
