@@ -414,9 +414,9 @@ public class Strings {
     }
     StringBuilder withFreqString = new StringBuilder(" ");
     char c = 'a';
-    for (int i:freq) {
-      withFreqString.append(c+" ");
-      withFreqString.append(i+" ");
+    for (int i : freq) {
+      withFreqString.append(c + " ");
+      withFreqString.append(i + " ");
       c++;
     }
     return withFreqString.toString();
@@ -440,8 +440,45 @@ public class Strings {
     return new ArrayList<>(map.values());
   }
 
+  public static boolean isPalindromeString(String s) {
+    int low = 0;
+    int heigh = s.length() - 1;
+    while (low <= heigh) {
+      if (s.charAt(low) != s.charAt(heigh)) {
+        return false;
+      }
+      low++;
+      heigh--;
+    }
+    return true;
+  }
+
+  public static String IterateString(int i, int j, String str) {
+    StringBuilder strs = new StringBuilder("");
+    for (int k = i; k <= j; k++) {
+      strs.append(str.charAt(k));
+    }
+    return strs.toString();
+  }
+
+  public static String LengthOfLongestPalindromeString(String s) {
+    String longestPalindrome = "";
+    for (int i = 0; i < s.length(); i++) {
+      for (int j = 1; j < s.length(); j++) {
+        String str = IterateString(i, j, s);
+        boolean isPalindrome = isPalindromeString(str.toString());
+        if (isPalindrome) {
+          if(longestPalindrome.length() < str.length()){
+            longestPalindrome = str;
+          }
+        }
+      }
+    }
+    return longestPalindrome;
+  }
+
   public static void main(String[] args) {
-    // String s = "rat", t = "car";
+    System.out.println(LengthOfLongestPalindromeString("zudfweormatjycujjirzjpyrma"));
     System.out.println(GetFrequencyOfString("karan"));
     String[] str = { "eat", "tea", "tan", "ate", "nat", "bat" };
     System.out.println(GroupAnagram(str));
