@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 import javax.xml.stream.events.Characters;
@@ -406,24 +407,60 @@ public class Strings {
 
   }
 
+  public static String GetFrequencyOfString(String str) {
+    int freq[] = new int[26];
+    for (char c : str.toCharArray()) {
+      freq[c - 'a']++;
+    }
+    StringBuilder withFreqString = new StringBuilder(" ");
+    char c = 'a';
+    for (int i:freq) {
+      withFreqString.append(c+" ");
+      withFreqString.append(i+" ");
+      c++;
+    }
+    return withFreqString.toString();
+  }
+
+  public static List<List<String>> GroupAnagram(String[] strs) {
+    HashMap<String, List<String>> map = new HashMap<>();
+    for (String s : strs) {
+      char[] arr = s.toCharArray();
+      Arrays.sort(arr);
+      String sorted = new String(arr);
+
+      if (map.containsKey(sorted)) {
+        map.get(sorted).add(sorted);
+      } else {
+        List<String> list = new ArrayList<>();
+        list.add(sorted);
+        map.put((sorted), list);
+      }
+    }
+    return new ArrayList<>(map.values());
+  }
+
   public static void main(String[] args) {
     // String s = "rat", t = "car";
+    System.out.println(GetFrequencyOfString("karan"));
+    String[] str = { "eat", "tea", "tan", "ate", "nat", "bat" };
+    System.out.println(GroupAnagram(str));
     String s = "ABAB";
     int k = 2;
     System.out.println(characterReplacement(s, k));
     // System.out.println(validAnagram2(s, t));
-    String str = "(){}[";
-    String[] strs = { "flower", "flow", "flight" };
-    System.out.println(longestCommonPrefix2(strs));
-    System.out.println(validParantheses(str));
-    System.out.println(validPalindrome(str));
-    System.out.println(reverseWordsWithoutVowels(str));
-    System.out.println(withoutVowels(str));
-    int arr[] = { 4, 5, 6, 7, 0, 1, 2 };
-    System.out.println(searchInRotatedArray(arr, 4, 0, arr.length - 1));
-    System.out.println(maxSubArraySum(arr));
-    System.out.println(isDuplicate(arr));
-    zerosInEnd(arr);
+    // String str = "(){}[";
+    // String[] strs = { "flower", "flow", "flight" };
+    // System.out.println(longestCommonPrefix2(strs));
+    // System.out.println(validParantheses(str));
+    // System.out.println(validPalindrome(str));
+    // System.out.println(reverseWordsWithoutVowels(str));
+    // System.out.println(withoutVowels(str));
+    // int arr[] = { 4, 5, 6, 7, 0, 1, 2 };
+    // System.out.println(searchInRotatedArray(arr, 4, 0, arr.length - 1));
+    // System.out.println(maxSubArraySum(arr));
+    // System.out.println(isDuplicate(arr));
+    // zerosInEnd(arr);
     // int arr[][] = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
     // print2DArray(arr);
     // // String str = "helloworld";
