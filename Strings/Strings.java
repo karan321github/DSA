@@ -490,8 +490,31 @@ public class Strings {
     return count;
   }
 
+  public static boolean compareToString(String s1, String s2) {
+    return (s1 + s2).compareTo(s2 + s1) > 0;
+  }
+
+  public static String FindLargest(int arr[]) {
+    ArrayList<String> list = new ArrayList<>();
+    for (int i : arr) {
+      list.add(Integer.toString(i));
+    }
+    Collections.sort(list, (s1, s2) -> compareToString(s1, s2) ? -1 : 1);
+    if (list.get(0).equals("0")) {
+      return "0";
+    }
+
+    StringBuilder ans = new StringBuilder();
+    for (String s : list) {
+      ans.append(s);
+    }
+
+    return ans.toString();
+  }
+
   public static void main(String[] args) {
-    System.out.println(countSubstrings("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+    int arr [] = {3, 30, 34, 5, 9};
+    System.out.println(FindLargest(arr));
     System.out.println(LengthOfLongestPalindromeString("zudfweormatjycujjirzjpyrma"));
     System.out.println(GetFrequencyOfString("karan"));
     String[] str = { "eat", "tea", "tan", "ate", "nat", "bat" };
