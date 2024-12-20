@@ -69,11 +69,48 @@ public class Patterns {
                                 System.out.print(" ");
                         }
                         for(int j=1; j<=2*(n-i)+1; j++){
+                                System.out.print("*"    );
+                        }
+                        System.out.println();
+                }
+        }
+
+        public static void HalfDiamondStar(int n){
+                for(int i=1; i<=n; i++){
+                        for(int j=1; j<=i; j++){
+                                System.out.print("*");
+                        }
+                        System.out.println();
+                }
+
+                for(int i=1; i<=n; i++){
+                        for(int j=n-i; j>=1; j--){
                                 System.out.print("*");
                         }
                         System.out.println();
                 }
         }
+
+        public static void DiamondShape(int n){
+                for (int i = 0; i <n; i++) {
+                        for (int space = 0; space < n - i-1; space++) {
+                                System.out.print(" ");
+                        }
+                        for(int j=0; j<2*i+1; j++){
+                                System.out.print("*");
+                        }
+                        System.out.println();
+                }
+                for (int i = 1; i <=n; i++) {
+                        for (int space=1; space<=i-1; space++) {
+                                System.out.print(" ");
+                        }
+                        for(int j=1; j<=2*(n-i)+1; j++){
+                                System.out.print("*"    );
+                        }
+                        System.out.println();
+                }
+        } 
 
         public static void main(String[] args) {
                 // NumberTrianglePattern(10);
@@ -82,8 +119,9 @@ public class Patterns {
                 // InvertedHalfPyramid(4);
                 // System.out.println();
                 // InvertedLeftHalfPyramid(5);
-                FullPyramid(5);
-                System.out.println();
-                InvertedFullPyramid(5);
+                // FullPyramid(5);
+                // InvertedFullPyramid(5);
+               // HalfDiamondStar(5);
+               DiamondShape(10);
         }
 }
