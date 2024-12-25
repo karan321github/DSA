@@ -35,7 +35,7 @@ class HelloWorld {
                         if (root == null) {
                                 System.out.print(-1 + " ");
                                 return;
-                        }
+                        }       
                         System.out.print(root.data + " ");
                         preorder(root.left);
                         preorder(root.right);
@@ -344,10 +344,10 @@ class HelloWorld {
         }
 
         public static void main(String[] args) {
-                // int nodes[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
+                int nodes[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
                 BinaryTree tree = new BinaryTree();
-                // Node ans = tree.buildTree(nodes);
-                // tree.preorder(ans);
+                Node ans = tree.buildTree(nodes);
+                tree.preorder(ans);
                 // System.out.println();
                 // tree.inorder(ans);
                 // System.out.println();
@@ -355,8 +355,8 @@ class HelloWorld {
                 // System.out.println();
                 // tree.levelOrder(ans);
 
-                // int maxHeight = tree.heightOfTree(ans);
-                // System.out.println(maxHeight);
+                int maxHeight = tree.heightOfTree(ans);
+                System.out.println(maxHeight);
                 // int numberOfTotalNodesInATree = tree.noOfNodesInATree(ans);
                 // System.out.println(numberOfTotalNodesInATree);
 
@@ -375,26 +375,26 @@ class HelloWorld {
                 // subroot.left = new Node(4);
                 // subroot.right = new Node(5);
 
-                Node root = new Node(1);
-                root.left = new Node(2);
-                root.right = new Node(3);
-                root.left.left = new Node(4);
-                root.left.right = new Node(5);
-                root.right.left = new Node(6);
-                root.right.right = new Node(7);
+                // Node root = new Node(1);
+                // root.left = new Node(2);
+                // root.right = new Node(3);
+                // root.left.left = new Node(4);
+                // root.left.right = new Node(5);
+                // root.right.left = new Node(6);
+                // root.right.right = new Node(7);
 
-                // System.out.println(tree.isSubTree(root, subroot));
-                tree.topView(root);
-                System.out.println();
-                tree.kthLevel(root, 1, 3);
-                System.out.println();
-                tree.KthLevelIterative(root, 3);
-                System.out.println(tree.lca(root, 4, 5).data);
+                // // System.out.println(tree.isSubTree(root, subroot));
+                // tree.topView(root);
+                // System.out.println();
+                // tree.kthLevel(root, 1, 3);
+                // System.out.println();
+                // tree.KthLevelIterative(root, 3);
+                // System.out.println(tree.lca(root, 4, 5).data);
 
-                System.out.println(tree.minDistanceBetweenTwoNodes(root, 4, 5));
-                System.out.println(tree.KthAnccestor(root , 5 , 2));
+                // System.out.println(tree.minDistanceBetweenTwoNodes(root, 4, 5));
+                // System.out.println(tree.KthAnccestor(root , 5 , 2));
 
-                System.out.println(tree.minDistanceBetweenTwoNodes(root, 4, 2));
+                // System.out.println(tree.minDistanceBetweenTwoNodes(root, 4, 2));
 
         }
 }

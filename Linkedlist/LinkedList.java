@@ -58,7 +58,8 @@ public class LinkedList {
                 }
                 head = prev;
         }
-
+        
+        
         public static void main(String[] args) {
                 LinkedList ll = new LinkedList();
                 ll.AddFirst(1);
