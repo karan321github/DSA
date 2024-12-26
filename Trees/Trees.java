@@ -35,7 +35,7 @@ class HelloWorld {
                         if (root == null) {
                                 System.out.print(-1 + " ");
                                 return;
-                        }       
+                        }
                         System.out.print(root.data + " ");
                         preorder(root.left);
                         preorder(root.right);
@@ -340,23 +340,55 @@ class HelloWorld {
                         return max + 1;
 
                 }
-                
+
+                public static boolean helper(Node l , Node r){
+                   if(l == null && r == null){
+                        return true;
+                   }
+                   if(l == null || r == null){
+                        return false;
+                   }
+
+                   boolean isDataSame = l.data == r.data;
+                   boolean isSymmetric1 = helper(l.left, r.right) ;
+                   boolean isSymmetric2 = helper(l.right, r.left);
+
+                   return isDataSame && isSymmetric1 && isSymmetric2;
+
+                }
+
+                public static boolean isSymmetric(Node root) {
+                        if (root == null) {
+                                return true;
+                        }
+
+                        return helper(root.left, root.right);
+                }
+
         }
 
         public static void main(String[] args) {
-                int nodes[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
                 BinaryTree tree = new BinaryTree();
-                Node ans = tree.buildTree(nodes);
-                tree.preorder(ans);
+                Node root = new Node(1);
+                root.left = new Node(2);
+                root.left.left = new Node(3);
+                root.left.right = new Node(4);
+                root.right = new Node(2);
+                root.right.right = new Node(3);
+                root.right.left = new Node(4);
+                //System.out.println(tree.isSymmetric(root));
+                System.out.println(tree.noOfNodesInATree(root));
+                // int nodes[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
+                // Node ans = tree.buildTree(nodes);
+                // tree.preorder(ans);
                 // System.out.println();
                 // tree.inorder(ans);
                 // System.out.println();
                 // tree.postOrder(ans);
                 // System.out.println();
                 // tree.levelOrder(ans);
-
-                int maxHeight = tree.heightOfTree(ans);
-                System.out.println(maxHeight);
+                // int maxHeight = tree.heightOfTree(ans);
+                // System.out.println(maxHeight);
                 // int numberOfTotalNodesInATree = tree.noOfNodesInATree(ans);
                 // System.out.println(numberOfTotalNodesInATree);
 
