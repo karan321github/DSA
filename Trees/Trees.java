@@ -341,19 +341,19 @@ class HelloWorld {
 
                 }
 
-                public static boolean helper(Node l , Node r){
-                   if(l == null && r == null){
-                        return true;
-                   }
-                   if(l == null || r == null){
-                        return false;
-                   }
+                public static boolean helper(Node l, Node r) {
+                        if (l == null && r == null) {
+                                return true;
+                        }
+                        if (l == null || r == null) {
+                                return false;
+                        }
 
-                   boolean isDataSame = l.data == r.data;
-                   boolean isSymmetric1 = helper(l.left, r.right) ;
-                   boolean isSymmetric2 = helper(l.right, r.left);
+                        boolean isDataSame = l.data == r.data;
+                        boolean isSymmetric1 = helper(l.left, r.right);
+                        boolean isSymmetric2 = helper(l.right, r.left);
 
-                   return isDataSame && isSymmetric1 && isSymmetric2;
+                        return isDataSame && isSymmetric1 && isSymmetric2;
 
                 }
 
@@ -363,6 +363,21 @@ class HelloWorld {
                         }
 
                         return helper(root.left, root.right);
+                }
+
+                public static int diameter(Node root) {
+                        if (root == null) {
+                                return 0;
+                        }
+                        int leftDiam = diameter(root.left);
+                        int rightDiam = diameter(root.right);
+                        int leftHeight = heightOfTree(root.left);
+                        int rightHeight = heightOfTree(root.left);
+
+                        int throughRoot = leftHeight + rightHeight + 1;
+                        int maxDiameter = Math.max(throughRoot, Math.max(rightDiam, leftDiam));
+
+                        return maxDiameter;
                 }
 
         }
@@ -376,7 +391,7 @@ class HelloWorld {
                 root.right = new Node(2);
                 root.right.right = new Node(3);
                 root.right.left = new Node(4);
-                //System.out.println(tree.isSymmetric(root));
+                // System.out.println(tree.isSymmetric(root));
                 System.out.println(tree.noOfNodesInATree(root));
                 // int nodes[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
                 // Node ans = tree.buildTree(nodes);
