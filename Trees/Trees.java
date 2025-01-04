@@ -380,6 +380,18 @@ class HelloWorld {
                         return maxDiameter;
                 }
 
+                public static Node buildBinarySearchTree(int[] nodes) {
+                        i++;
+                        Node root = new Node(i);
+                        if (nodes[i] < root.data) {
+                                root.left = buildBinarySearchTree(nodes);
+                        } else {
+                                root.right = buildBinarySearchTree(nodes);
+                        }
+
+                        return root;
+                }
+
         }
 
         public static void main(String[] args) {

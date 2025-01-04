@@ -125,6 +125,13 @@ public class Recursion {
 
         }
 
+        public static int greatestCommonDivisor(int a, int b) {
+                if (b == 0) {
+                        return a;
+                }
+                return greatestCommonDivisor(b, a % b);
+        }
+
         public static void main(String[] args) {
                 // printInDecreasingOrder(10);
                 // System.out.println();
@@ -143,5 +150,6 @@ public class Recursion {
                 // System.out.println(removeDuplicate("aabbcda", new StringBuilder(""), 0, new
                 // boolean[26]));
                 System.out.println(friendsPairing(3));
+                System.out.println(greatestCommonDivisor(15, 10));
         }
 }
