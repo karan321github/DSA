@@ -1,6 +1,7 @@
 package BST;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BST {
         class Node {
@@ -130,19 +131,57 @@ public class BST {
                 path.remove(path.size() - 1);
         }
 
-        public static void validateBst(Node root) {
+        public static void validateBstInOrderTraversal(Node root, List<Integer> list) {
                 if (root == null) {
                         return;
                 }
-                ArrayList<Integer> list = new ArrayList<>();
-                validateBst(root.left);
-                list.add(root.data);
-                System.out.print(root.data + " ");
-                validateBst(root.right);
 
-                // for (int i = 0; i < list.size(); i++) {
-                //         System.out.print(list.get(i) + " ");
-                // }
+                validateBstInOrderTraversal(root.left, list);
+                list.add(root.data);
+                validateBstInOrderTraversal(root.right, list);
+
+        }
+
+        public static boolean isValidBST(Node root) {
+                ArrayList<Integer> inorderList = new ArrayList<>();
+                validateBstInOrderTraversal(root, inorderList);
+
+                for (int i = 1; i < inorderList.size(); i++) {
+                        if (inorderList.get(i) <= inorderList.get(i - 1)) {
+                                return false;
+                        }
+                }
+
+                return true;
+        }
+
+        public static boolean isValidBST2ndApproach(Node root, Node min, Node max) {
+                if (root == null) {
+                        return true;
+                }
+
+                if (min != null && root.data <= min.data) {
+                        return false;
+                }
+
+                if (max != null && root.data >= max.data) {
+                        return false;
+                }
+
+                return isValidBST2ndApproach(root.left, min, root) && isValidBST2ndApproach(root.right, root, max);
+        }
+
+        public static Node mirrorOfBST(Node root) {
+                if (root == null) {
+                        return null;
+                }
+                Node ls = mirrorOfBST(root.left);
+                Node rs = mirrorOfBST(root.right);
+
+                root.left = rs;
+                root.right = ls;
+
+                return root;
         }
 
         public static void main(String[] args) {
@@ -164,6 +203,11 @@ public class BST {
                 // printInRange(root, 5, 10);
                 // System.out.println();
                 // printRootToLeafPath(root, new ArrayList<>());
-                validateBst(root);
+                System.out.println(isValidBST(root));
+                if (isValidBST2ndApproach(root, null, null)) {
+                        System.out.println("valid BST");
+                } else {
+                        System.out.println("Invalid BST");
+                }
         }
 }

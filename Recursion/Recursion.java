@@ -132,6 +132,36 @@ public class Recursion {
                 return greatestCommonDivisor(b, a % b);
         }
 
+        // [[1 ,2 , 3] , [4 , 5 ,6] , [7 ,8 , 9]]
+        //
+        //
+        public static int sumOfMatrix(int[][] matrix, int i, int j) {
+                if (i == matrix.length) {
+                        // Base case: If we've processed all rows, return 0.
+                        return 0;
+                }
+
+                if (j == matrix[0].length) {
+                        // End of the current row, move to the next row.
+                        return sumOfMatrix(matrix, i + 1, 0);
+                }
+
+                // Add the current element and continue.
+                return matrix[i][j] + sumOfMatrix(matrix, i, j + 1);
+        }
+
+        public static int sumOf2DArray(int[][] arr) {
+                int sum = 0;
+                int m = arr.length;
+                int n = arr[0].length;
+                for (int i = 0; i < m; i++) {
+                        for (int j = 0; j < n; j++) {
+                                sum += arr[i][j];
+                        }
+                }
+                return sum;
+        }
+
         public static void main(String[] args) {
                 // printInDecreasingOrder(10);
                 // System.out.println();
@@ -149,7 +179,16 @@ public class Recursion {
                 // System.out.println(tilingProblem(4));
                 // System.out.println(removeDuplicate("aabbcda", new StringBuilder(""), 0, new
                 // boolean[26]));
-                System.out.println(friendsPairing(3));
-                System.out.println(greatestCommonDivisor(15, 10));
+                // System.out.println(friendsPairing(3));
+                // System.out.println(greatestCommonDivisor(15, 10));
+                int[][] matrix = {
+                                { 1, 2, 3, 4 },
+                                { 4, 5, 6, 5 },
+                                { 7, 8, 9, 6 },
+                                { 7, 8, 9, 0 }
+                };
+
+                int sum =  sumOfMatrix(matrix, 0, 0);
+                System.out.println("Sum of matrix elements: " + sum);
         }
 }
