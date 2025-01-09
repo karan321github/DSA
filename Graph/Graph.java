@@ -3,6 +3,7 @@ package Graph;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -68,7 +69,7 @@ public class Graph {
 
         }
 
-        public static boolean isCycle(ArrayList<Edge> graph[], int curr, boolean vis[], boolean stack[]) {
+        public static boolean isCycleUtil(ArrayList<Edge> graph[], int curr, boolean vis[], boolean stack[]) {
                 System.out.print(curr + " ");
                 vis[curr] = true;
                 stack[curr] = true;
@@ -79,7 +80,7 @@ public class Graph {
                                 return true;
                         }
 
-                        if (!vis[e.dest] && isCycle(graph, e.dest, vis, stack)) {
+                        if (!vis[e.dest] && isCycleUtil(graph, e.dest, vis, stack)) {
                                 return true;
                         }
                 }
@@ -94,7 +95,7 @@ public class Graph {
 
                 for (int i = 0; i < graph.length; i++) {
                         if (!visited[i]) {
-                                if (isCycle(graph, i, visited, stack)) {
+                                if (isCycleUtil(graph, i, visited, stack)) {
                                         return true;
                                 }
                         }
@@ -112,7 +113,7 @@ public class Graph {
                 // 1-s
                 graph[1].add(new Edge(1, 3, 0));
 
-                //[2].add(new Edge(2, 3, 0));
+                // [2].add(new Edge(2, 3, 0));
 
         }
 
@@ -147,6 +148,104 @@ public class Graph {
                 }
 
                 return false;
+        }
+
+        public static void calculateIndegree(ArrayList<Edge> graph[]) {
+                for (int i = 0; i < graph.length; i++) {
+                        Edge e = graph[i].get(i);
+                        e.dest++;
+                }
+        }
+
+        public static void topologicalSort(ArrayList<Edge> graph[]) {
+                // step - 1 Calculate indegree of a node add inside a queue if indegree == 0
+                int indegree[] = new int[graph.length];
+                Queue<Integer> q = new LinkedList<>();
+                for (int i = 0; i < indegree.length; i++) {
+                        if (indegree[i] == 0) {
+                                q.add(i);
+                        }
+                }
+                // step - 2 then follow the bfs;
+                while (!q.isEmpty()) {
+                        int curr = q.remove();
+                        System.out.print(curr + " ");
+
+                        for (int i = 0; i < graph[curr].size(); i++) {
+                                Edge e = graph[i].get(i);
+                                indegree[e.dest]--;
+                                if (indegree[e.dest] == 0) {
+                                        q.add(e.dest);
+                                }
+                        }
+                }
+                System.out.println();
+        }
+
+        public static void allPathsFromSrcToDest(ArrayList<Edge> graph[], int src, int dest, String path) {
+                if (src == dest) {
+                        System.out.println(path + dest);
+                        return;
+                }
+
+                for (int i = 0; i < graph[src].size(); i++) {
+                        Edge e = graph[src].get(i);
+                        allPathsFromSrcToDest(graph, e.dest, dest, path + src);
+                }
+        }
+
+        static class Pair implements Comparable<Pair> {
+                int n;
+                int path;
+
+                public Pair(int n, int path) {
+                        this.n = n;
+                        this.path = path;
+                }
+
+                @Override
+                public int compareTo(Pair p2) {
+                        return this.path - p2.path;
+                }
+        }
+
+        public static void dijkstra(ArrayList<Edge> graph[], int src) {
+                int dist[] = new int[graph.length];
+                boolean vis[] = new boolean[graph.length];
+
+                for (int i = 0; i < dist.length; i++) {
+                        if (i != src) {
+                                dist[i] = Integer.MAX_VALUE;
+                        }
+                }
+                PriorityQueue<Pair> pq = new PriorityQueue<>();
+                pq.add(new Pair(src, 0));
+
+                while (!pq.isEmpty()) {
+                    Pair curr = pq.remove();
+                        if (!vis[curr.n]) {
+                          vis[curr.n] = true;
+                        
+
+                                for(int i=0; i<graph[curr.n].size(); i++){
+                                Edge e = graph[curr.n].get(i);
+                                int u = e.src;
+                                int v = e.dest;
+                                int wt = e.wt
+
+                                if(dist[u]+wt < dist[v]){
+                                        dist[v] = dist[u]+wt;
+                                        pq.add(new Pair(v , dist[v]));
+                                }
+                        }
+                    }
+                }
+
+                for(int i=0; i<dist.length; i++){
+                        System.out.print(dist[i]+" ");
+                }
+                System.out.println();
+
         }
 
         public static void main(String[] args) {
